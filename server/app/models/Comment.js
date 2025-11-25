@@ -90,10 +90,10 @@ const options = {
 };
 
 const Comment = {
-  init: (Sequelize) => {
-    const difine = Sequelize.difine(modelName, attributes, options);
+  init: (sequelize) => {
+    const define = sequelize.define(modelName, attributes, options);
 
-    return difine;
+    return define;
   },
   associate: (db) => {
     db.Comment.belongsTo(db.User, { targetKey: 'id', foreignKey: 'user_id', as: 'user' });

@@ -92,9 +92,9 @@ const options = {
 
 const Notification = {
   init: (sequelize) => {
-    const difine = sequelize.difine(modelName, attributes, options);
+    const define = sequelize.define(modelName, attributes, options);
 
-    return difine;
+    return define;
   },
   associate: (db) => {
     db.Notification.belongsTo(db.User, { targetKey: 'id', foreignKey: 'user_id', as: 'user' });

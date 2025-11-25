@@ -23,3 +23,4 @@ app.use(errorHandler);
 // --------------------
 // 해당 Port로 express 실행
 // --------------------
+app.listen(parseInt(process.env.APP_PORT));

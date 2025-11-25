@@ -79,9 +79,9 @@ const options = {
 
 const Like = {
   init: (sequelize) => {
-    const difine = sequelize.difine(modelName, attributes, options);
+    const define = sequelize.define(modelName, attributes, options);
 
-    return difine;
+    return define;
   },
   associate: (db) => {
     db.Like.belongsTo(db.User, { targetKey: 'id', foreignKey: 'user_id', as: 'user' });
