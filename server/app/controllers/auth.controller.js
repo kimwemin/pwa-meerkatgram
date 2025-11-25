@@ -15,25 +15,25 @@ import { createBaseResponse } from "../utils/createBaseResponse.util.js";
  * 로그인 컨트롤러 처리
  * @param {import("express").Request} req - Request 객체
  * @param {import("express").Response} res - Response 객체
- * @param {import("express").NextFunction} next - NextFunction 객체
+ * @param {import("express").NextFunction} next - NextFunction 객체 
  * @returns
  */
 async function login(req, res, next) {
   try {
     const body = req.body; // 파라미터 획득
-    
+
     // 로그인 서비스 호출
     const result = await authService.login(body);
   
-    return res.status(SUCCESS.status). send(createBaseResponse(SUCCESS, result));  
-  } catch (error) {
-    return res.status(500).send(error.message);
+    return res.status(SUCCESS.status).send(createBaseResponse(SUCCESS, result));
+  } catch(error) {
+    next(error);
   }
 }
 
-// ---------------
+// --------------
 // export
-// ---------------
-export const authController = {
+// --------------
+export default {
   login,
 };
