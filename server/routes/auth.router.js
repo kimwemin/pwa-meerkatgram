@@ -8,6 +8,7 @@ import express from 'express';
 import authController from '../app/controllers/auth.controller.js';
 import loginValidator from '../app/middlewares/validations/validators/auth/login.validator.js';
 import validationHandler from '../app/middlewares/validations/validationHandler.js';
+import authMiddleware from '../app/middlewares/auth/auth.middleware.js';
 
 const authRouter = express.Router();
 
@@ -15,5 +16,8 @@ const authRouter = express.Router();
 // router는 컨트롤러로 연결하는 연결책에 불과하다
 // return은 후속 동작이 없을 때 확실히 작업을 끝내기 위해 사용
 authRouter.post('/login', loginValidator, validationHandler, authController.login);
+authRouter.post('/reissue', authMiddleware, (req, res, next) => {
+  return res.send('reissue test');
+});
 
 export default authRouter;

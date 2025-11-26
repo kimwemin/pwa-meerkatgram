@@ -8,9 +8,21 @@ import express from 'express';
 import './configs/env.config.js';
 import authRouter from './routes/auth.router.js';
 import errorHandler from './app/errors/errorHandler.js';
+import swaggerUi from 'swagger-ui-express';
+import SwaggerParser from 'swagger-parser';
+import path from 'path';
 
 const app = express();
 app.use(express.json()); // JSON 요청 파싱 처리
+
+// --------------------
+// Swagger 등록
+// --------------------
+// 모듈 방식의 엔트리 포인트(app.js)에서는 async 문법을 바로 쓸 수 있다
+// swagger yaml file bundling
+const swaggerDoc = await SwaggerParser.bundle(path.join(path.resolve(), 'swagger/swagger.yaml')); // 상대경로가 아닌 절대경로로 잡아줘야 한다.
+//swagger ui 등록
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
 // --------------------
 // 라우터 정의

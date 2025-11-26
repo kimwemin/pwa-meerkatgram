@@ -23,7 +23,7 @@ function setCookie(res, cookieName, cookieValue, ttl, httpOnlyFlg = true, secure
     cookieName,
     cookieValue,
     {
-      expires: dayjs().add(ttl, 'millisecond').toDate(), // toDate() : Date 객체로 변환하는 메소드
+      expires: dayjs().add(ttl, 'second').toDate(), // toDate() : Date 객체로 변환하는 메소드
       httpOnly: httpOnlyFlg,
       secure: secureFlg,
       sameSite: 'none', // 도메인 검증 - none(검증 안 함), lax(도메인이 달라도 내가 설정한 서버라면 허용), strict(도메인 다르면 허용 X)

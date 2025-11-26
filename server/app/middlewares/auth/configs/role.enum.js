@@ -1,0 +1,15 @@
+/**
+ * @file app/middlewares/auth/configs/role.enum.js
+ * @description 유저 권한 상수 설정 파일
+ * 251126 v1.0.0 김위민 init
+ */
+
+const ROLE = {
+  ADMIN: 'ADMIN',
+  SUPER: 'SUPER',
+  NOMAL: 'NORMAL'
+};
+
+Object.freeze(ROLE);
+
+export default ROLE;
