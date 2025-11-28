@@ -20,9 +20,7 @@ async function findByEmail(t = null, email) {// transaction의 약어로 t를 �
     {
       where: {
         email: email
-      }
-    },
-    {
+      },
       transaction: t
     }
   );
