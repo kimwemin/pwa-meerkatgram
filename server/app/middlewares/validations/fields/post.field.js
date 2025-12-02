@@ -4,13 +4,13 @@
  * 251128 v1.0.0 김위민 init
  */
 
-import { body, param } from "express-validator";
+import { body, param, query } from "express-validator";
 import fs from 'fs';
 import pathUtil from "../../../utils/path/path.util.js";
 import path from "path";
 
 // 페이지 필드
-export const page = body('page')
+export const page = query('page')
   .trim()
   .optional()
   .isNumeric() // 숫자인지 체크
@@ -53,7 +53,7 @@ export const image = body('image')
     // 실제 이미지 파일이 있는지 검증 처리
     const splitPath = val.split('/');
     const fullPath = path.join(pathUtil.getPostsImagePath(), splitPath[splitPath.length - 1]);
-    
+
     if(!fs.existsSync(fullPath)) {
       return false;
     }

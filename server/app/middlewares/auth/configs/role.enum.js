@@ -7,7 +7,7 @@
 const ROLE = {
   ADMIN: 'ADMIN',
   SUPER: 'SUPER',
-  NOMAL: 'NORMAL'
+  NORMAL: 'NORMAL'
 };
 
 Object.freeze(ROLE);

@@ -1,16 +1,58 @@
+import { useState } from 'react';
 import './Login.css'
+import { useDispatch } from 'react-redux';
+import { loginThunk } from '../../store/thunks/authThunk.js';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
+  const dispatch = useDispatch();
+  const navigate= useNavigate();
+
+  // const [emailErr, setEmailErr] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  async function handleLogin(e) {
+    // 기존 이벤트 취소
+    e.preventDefault();
+
+    try {
+      // 로그인 요청
+      await dispatch(loginThunk({email, password})).unwrap();
+      
+      // replace: history 설정 / 기본값은 false(history를 남기겠다) / true(history를 남기지 않겠다)
+      return navigate('/posts', { replace: true });
+    } catch(error) {
+      console.log(error);
+      const code = error.response?.data?.code;
+      alert(`로그인 실패했습니다. ${code}`);
+    }
+  }
+
+  // 오류 메시지 띄우기
+  // onChange에 아래 함수 넣기
+  // function valridationAndSetEmail(e) {
+  //   const val = e.target.value;
+
+  //   if(/^[0-9]+$/.test(val)) {
+  //     setEmail(e.target.value)
+  //     setEmailErr(null);
+  //   } else {
+  //     setEmailErr('이메일 형식 오류');
+  //   }
+  // }
+
   return (
     <>
-      <div className="login-container">
-        <input type="text" className='input-big-border' name="email" id="email" placeholder='email' />
-        <input type="text" className='input-big-border' name="password" id="password" placeholder='password' />
-        <button type="button" className="btn-big bg-gray">Log in</button>
+      <form className="login-container" onSubmit={handleLogin}>
+        {/* {emailErr} */}
+        <input type="text" className='input-big-border' onChange={ e => { setEmail(e.target.value) } } placeholder='email' />
+        <input type="text" className='input-big-border' onChange={ e => { setPassword(e.target.value) } } placeholder='password' />
+        <button type="submit" className="btn-big bg-gray">Log in</button>
         <div className="text-on-line">or</div>
         <button type="button" className="btn-big bg-img-kakao"></button>
         <button type="button" className="btn-big bg-light">Sign up</button>
-      </div>
+      </form>
     </>
   )
 }
