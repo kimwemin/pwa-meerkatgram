@@ -13,6 +13,11 @@ import db from '../models/index.js'
 
 // 실질적으로 구현하고자 하는 비지니스 처리가 들어가는 파일
 
+/**
+ * 로그인
+ * @param {{emali: string, password: string}}} body 
+ * @returns {Promise<import("../models/User.js").User>}
+ */
 async function login(body) {
   // 트랜잭션 처리
   // 비지니스 처리 도중 오류가 생겼을 때 롤백하기 위해 비지니스 로직들을 하나의 트랜잭션으로 감싸주는 처리
