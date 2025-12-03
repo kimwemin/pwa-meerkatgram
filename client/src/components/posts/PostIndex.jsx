@@ -2,9 +2,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import './PostIndex.css';
 import { useEffect } from 'react';
 import { postIndexThunk } from '../../store/thunks/postIndexThunk.js';
+import { useNavigate } from 'react-router-dom';
 
 export default function PostIndex() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { list, page, isLasted } = useSelector(state => state.postIndex);
 
@@ -17,6 +19,10 @@ export default function PostIndex() {
   function nextPage() {
     dispatch(postIndexThunk(page + 1));
   }
+
+  function redirectPostShow(id) {
+    navigate(`/posts/show/${id}`);   
+  }
   
   return (
     <>
@@ -24,7 +30,7 @@ export default function PostIndex() {
         <div className="post-index-card-box">
           {
             list && list.map(item => {
-              return <div className="post-index-card" style={{backgroundImage: `url("${item.image}")`}} key={item.id}></div>
+              return <div className="post-index-card" style={{backgroundImage: `url("${item.image}")`}} key={item.id} onClick={() => { redirectPostShow(item.id) }}></div>
             })
           }
         </div>
